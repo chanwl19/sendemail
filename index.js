@@ -15,6 +15,11 @@ app.post('/email', async (req, res) => {
   const subject = req.body.subject;
   const content = req.body.content;
 
+  console.log('receive request ')
+  console.log('to ', to)
+  console.log('from ', from)
+  console.log('subject ', subject)
+  console.log('content ', content)
   let transporter;
   const mailOptions = {
     from: from,
@@ -32,6 +37,7 @@ app.post('/email', async (req, res) => {
       }
     });
   } catch (err) {
+    console.log("transporter err ",err)
     res.status(500).json({ message: 'Failed to send email' });
   }
 
@@ -39,6 +45,7 @@ app.post('/email', async (req, res) => {
     const sendEmail = await transporter.sendMail(mailOptions);
     res.status(200).json({ message: 'Success' });
   } catch (error) {
+    console.log("send err ",err)
     res.status(500).json({ message: 'Failed to send email' });
   }
 
