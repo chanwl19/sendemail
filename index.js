@@ -36,8 +36,8 @@ app.post('/email', async (req, res) => {
         pass: process.env.MAIL_PASSWORD
       }
     });
-  } catch (err) {
-    console.log("transporter err ",err)
+  } catch (error) {
+    console.log("transporter err ",error)
     res.status(500).json({ message: 'Failed to send email' });
   }
 
@@ -45,7 +45,7 @@ app.post('/email', async (req, res) => {
     const sendEmail = await transporter.sendMail(mailOptions);
     res.status(200).json({ message: 'Success' });
   } catch (error) {
-    console.log("send err ",err)
+    console.log("send err ",error)
     res.status(500).json({ message: 'Failed to send email' });
   }
 
